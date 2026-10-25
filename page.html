@@ -1,19 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@melnykdeveloper</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Melnyk — App Development</title>
+  <meta name="description" content="App development for iOS, macOS, Android, Windows and Linux, and updates to existing apps.">
+  <meta name="theme-color" content="#000000">
+  <style>
+    :root {
+      --bg: #000;
+      --text: #f5f5f7;
+      --muted: #8e8e93;
+      --line: rgba(255, 255, 255, 0.14);
+      --accent: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+    }
+
+    /* soft glow behind the content */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 50%; left: 50%;
+      width: 640px; height: 640px;
+      transform: translate(-50%, -60%);
+      background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 64px 16px 40px;
+    }
+
+    .logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 32px;
+      box-shadow: 0 0 0 10px rgba(255,255,255,0.03), 0 0 60px rgba(255,255,255,0.08);
+      animation: rise .9s cubic-bezier(.2,.7,.2,1) both;
+    }
+
+    h1 {
+      font-size: clamp(32px, 7vw, 48px);
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding-left: 0.18em; /* offsets letter-spacing so the word is truly centered */
+      animation: rise .9s .1s cubic-bezier(.2,.7,.2,1) both;
+    }
+
+    .tagline {
+      max-width: 520px;
+      font-size: clamp(17px, 3.6vw, 20px);
+      line-height: 1.4;
+      margin-bottom: 16px;
+      animation: rise .9s .2s cubic-bezier(.2,.7,.2,1) both;
+    }
+
+    .about {
+      max-width: 480px;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 28px;
+      animation: rise .9s .3s cubic-bezier(.2,.7,.2,1) both;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      list-style: none;
+      margin-bottom: 40px;
+      animation: rise .9s .4s cubic-bezier(.2,.7,.2,1) both;
+    }
+    .tags:has(+ .platforms) { margin-bottom: 10px; }
+    .tags.platforms li { color: var(--text); }
+    .tags li {
+      font-size: 13px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 14px;
+    }
+
+    .email {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--bg);
+      background: var(--accent);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 14px 26px;
+      border-radius: 999px;
+      transition: transform .2s, box-shadow .2s;
+      animation: rise .9s .5s cubic-bezier(.2,.7,.2,1) both;
+      max-width: 100%;
+      word-break: break-all;
+    }
+    .email:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255,255,255,0.15);
+    }
+    .email svg { flex-shrink: 0; }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 24px 16px max(24px, env(safe-area-inset-bottom));
+      font-size: 13px;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--line); }
+    footer a:hover { color: var(--text); }
+    footer .sep { margin: 0 8px; opacity: .5; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-    <div class="avatar">
-        <span>M</span>
-    </div>
-    <h1>@melnykdeveloper</h1>
-    <p>Contact us here:</p>
-    <a href="mailto:com.melnyk@gmail.com">com.melnyk@gmail.com</a>
-</div>
+  <main>
+    <div class="logo" aria-hidden="true">M</div>
+
+    <h1>Sergii Melnyk</h1>
+
+    <p class="tagline">App development for iOS, macOS, Android, Windows and Linux</p>
+
+    <p class="about">We specialize in building new apps and updating existing ones, from idea and design to release in the App Store, Google Play or for direct download. We also take care of maintenance, new features and support for the latest operating system versions.</p>
+
+    <ul class="tags">
+      <li>New apps</li>
+      <li>Updates &amp; maintenance</li>
+      <li>Mobile &amp; desktop</li>
+    </ul>
+
+    <ul class="tags platforms">
+      <li>iOS</li>
+      <li>macOS</li>
+      <li>Android</li>
+      <li>Windows</li>
+      <li>Linux</li>
+    </ul>
+
+    <a class="email" href="mailto:com.melnyk@gmail.com">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+      com.melnyk@gmail.com
+    </a>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
